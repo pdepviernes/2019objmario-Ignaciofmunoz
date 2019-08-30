@@ -19,7 +19,7 @@ object juego {
 object mario {
 
 	var position = game.center()
-	var pesosAhorrados = 0
+	var pesosAhorrados = 1
 
 	method levantar(cosa) {
 		position = cosa.position()
@@ -33,6 +33,7 @@ object mario {
 	}
 	
 	method ahorros() = pesosAhorrados
+	method nuevoCapital(cantidad){pesosAhorrados+=cantidad}
 	
 	method image() { return "mario.png"}
 	method position() { return position}
@@ -50,6 +51,37 @@ object peso {
 
 }
 
+object cajita {
+
+	var valor = 100
+
+	method valor() {return valor}
+
+	//method position() {return game.center().right(2)}
+	//method image() {return "peso.png"}
+
+}
+object invertir{
+	
+	method plazoFijo(persona) {
+		var ahorros =persona.ahorros() 
+		var plata = ahorros *0.02
+		persona.nuevoCapital(plata)
+	}
+	method lebacs(persona,banco){
+		var promedio=( persona.ahorros()+banco.capital())/2
+		persona.nuevoCapital(promedio*0.1)//entiendo rendimiento como ganancia neta
+		
+	}
+	method bonos(persona){
+		var rendimiento=persona.ahorros()*banco.inflacion()
+		persona.nuevoCapital(rendimiento)
+	}
+	
+}
+	
+	
+
 object unDolar {
 
 	method valor() = banco.cotizacion()
@@ -62,7 +94,10 @@ object unDolar {
 object banco {
 
 	var cotizacion = 45
-	
+	var capital=183213281
+	var inflacion=0.4
+method inflacion() {return inflacion}
+	method capital() {return capital}
 	method cotizacion() {return cotizacion}
 
 	method corrida(){
